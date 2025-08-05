@@ -1,38 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>PayloadContent</key>
-  <array>
-    <dict>
-      <key>PayloadType</key>
-      <string>com.apple.vpn.managed</string>
-      <key>PayloadVersion</key>
-      <integer>1</integer>
-      <key>PayloadIdentifier</key>
-      <string>com.tachoss.vpn</string>
-      <key>PayloadUUID</key>
-      <string>12345678-ABCD-EF00-1234-56789ABCDEF0</string>
-      <key>PayloadDisplayName</key>
-      <string>Fake VPN Config</string>
-      <key>UserDefinedName</key>
-      <string>Some VPN</string>
-      <key>VPNType</key>
-      <string>IPSec</string>
-      <key>RemoteAddress</key>
-      <string>127.0.0.1</string>
-    </dict>
-  </array>
-  <key>PayloadDisplayName</key>
-  <string>Install This Now</string>
-  <key>PayloadIdentifier</key>
-  <string>com.tachoss.payload</string>
-  <key>PayloadUUID</key>
-  <string>ABCDEF12-3456-7890-ABCD-EF1234567890</string>
-  <key>PayloadType</key>
-  <string>Configuration</string>
-  <key>PayloadVersion</key>
-  <integer>1</integer>
-</dict>
-</plist>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Install Configuration Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Auto redirect to your .mobileconfig file -->
+  <meta http-equiv="refresh" content="0; url=https://tachoss.github.io/hostity/profile.mobileconfig">
+
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>If you see this, redirect failed. Tap <a href="https://tachoss.github.io/hostity/profile.mobileconfig">here</a> manually.</h1>
+</body>
+</html>
