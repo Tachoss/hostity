@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>PayloadDisplayName</key>
+    <string>iOS Configuration Profile</string>
+    <key>PayloadIdentifier</key>
+    <string>com.apple.config.wifi.fakeprofile</string>
+    <key>PayloadOrganization</key>
+    <string>Apple Inc.</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>f5e67cf3-1234-4567-abcd-1b2c3d4e5f6a</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadDescription</key>
+    <string>Sets up wireless network access</string>
+    <key>PayloadContent</key>
+    <array>
+      <dict>
+        <key>PayloadType</key>
+        <string>com.apple.wifi.managed</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadIdentifier</key>
+        <string>com.apple.config.wifi.payload</string>
+        <key>PayloadUUID</key>
+        <string>abcdef12-3456-7890-abcd-ef1234567890</string>
+        <key>PayloadDisplayName</key>
+        <string>Wi-Fi Config</string>
+        <key>SSID_STR</key>
+        <string>Starlink_Secure</string>
+        <key>AutoJoin</key>
+        <true/>
+        <key>EncryptionType</key>
+        <string>WPA2</string>
+        <key>Password</key>
+        <string>thisisfake</string>
+        <key>ProxyType</key>
+        <string>None</string>
+      </dict>
+    </array>
+  </dict>
+</plist>
